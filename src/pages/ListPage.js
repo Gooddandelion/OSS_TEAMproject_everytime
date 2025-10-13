@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useLectureStore from '../store/lectureStore';
-import './ListPage.css'; 
+import './ListPage.css';
 
 function ListPage() {
   const { lectures, isLoading, error, fetchLectures } = useLectureStore();
@@ -12,41 +12,45 @@ function ListPage() {
   }, [fetchLectures]);
 
   if (isLoading) {
-    return React.createElement('div', null, '로딩 중...');
+    return <div>로딩 중...</div>;
   }
 
   if (error) {
-    return React.createElement('div', null, `에러: ${error}`);
+    return <div>에러: {error}</div>;
   }
 
-  return React.createElement('div', null,
-    React.createElement('h2', null, '강의 목록'),
-    React.createElement(Link, { to: '/add' },
-      React.createElement('button', null, '새 강의 추가하기')
-    ),
-    // className을 'list-table'로 지정합니다.
-    React.createElement('table', { className: 'list-table' },
-      React.createElement('thead', null,
-        React.createElement('tr', null,
-          ...tableHeaders.map(header => React.createElement('th', { key: header }, header))
-        )
-      ),
-      React.createElement('tbody', null,
-        ...lectures.map(lecture =>
-          React.createElement('tr', { key: lecture.id },
-            React.createElement('td', null, lecture.title),
-            React.createElement('td', null, lecture.prof),
-            React.createElement('td', null, lecture.day),
-            React.createElement('td', null, lecture.startTime),
-            React.createElement('td', null, lecture.place),
-            React.createElement('td', null, lecture.credits),
-            React.createElement('td', null,
-              React.createElement(Link, { to: `/detail/${lecture.id}` }, '보기')
-            )
-          )
-        )
-      )
-    )
+  return (
+    <div>
+      <h2>강의 목록</h2>
+      <Link to="/add">
+        <button>새 강의 추가하기</button>
+      </Link>
+
+      <table className="list-table">
+        <thead>
+          <tr>
+            {tableHeaders.map(header => (
+              <th key={header}>{header}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {lectures.map(lecture => (
+            <tr key={lecture.id}>
+              <td>{lecture.title}</td>
+              <td>{lecture.professor}</td>
+              <td>{lecture.day}</td>
+              <td>{`${lecture.startTime} - ${lecture.endTime}`}</td>
+              <td>{lecture.place}</td>
+              <td>{lecture.credits}</td>
+              <td>
+                <Link to={`/detail/${lecture.id}`}>보기</Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

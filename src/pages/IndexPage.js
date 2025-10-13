@@ -10,47 +10,53 @@ function IndexPage() {
     fetchLectures();
   }, [fetchLectures]);
 
-  // 시간표의 시간대와 요일 정의
+  // 시간표의 시간대와 요일 정의 (로직은 동일)
   const timeSlots = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
   const days = ['월', '화', '수', '목', '금'];
 
-  // 특정 요일과 시간에 해당하는 강의를 찾는 함수
   const findLecture = (day, time) => {
     return lectures.find(lecture => lecture.day === day && lecture.startTime === time);
   };
 
-  if (isLoading) { return React.createElement('div', null, '로딩 중...'); }
-  if (error) { return React.createElement('div', null, `에러: ${error}`); }
+  if (isLoading) { return <div>로딩 중...</div>; }
+  if (error) { return <div>에러: {error}</div>; }
 
-  return React.createElement('div', null,
-    React.createElement('h2', null, '나의 시간표'),
-    React.createElement(Link, { to: '/list' }, React.createElement('button', null, '강의 목록 관리')),
-    // className을 'timetable'로 지정합니다.
-    React.createElement('table', { className: 'timetable' },
-      React.createElement('thead', null,
-        React.createElement('tr', null,
-          React.createElement('th', null, '시간'),
-          ...days.map(day => React.createElement('th', { key: day }, day))
-        )
-      ),
-      React.createElement('tbody', null,
-        ...timeSlots.map(time =>
-          React.createElement('tr', { key: time },
-            React.createElement('td', { className: 'time-label' }, time),
-            ...days.map(day => {
-              const lecture = findLecture(day, time);
-              return React.createElement('td', {
-                key: `${day}-${time}`,
-                // 강의가 있으면 'lecture-cell' 클래스를 추가합니다.
-                className: lecture ? 'lecture-cell' : ''
-              },
-                lecture ? `${lecture.title} (${lecture.prof})` : ''
-              );
-            })
-          )
-        )
-      )
-    )
+  // React.createElement 대신 JSX 문법으로 화면을 구성합니다.
+  return (
+    <div>
+      <h2>나의 시간표</h2>
+      <Link to="/list">
+        <button>강의 목록 관리</button>
+      </Link>
+
+      <table className="timetable">
+        <thead>
+          <tr>
+            <th>시간</th>
+            {/* JavaScript의 map 함수를 {} 안에 직접 사용 */}
+            {days.map(day => (
+              <th key={day}>{day}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {timeSlots.map(time => (
+            <tr key={time}>
+              <td className="time-label">{time}</td>
+              {days.map(day => {
+                const lecture = findLecture(day, time);
+                return (
+                  <td key={`${day}-${time}`} className={lecture ? 'lecture-cell' : ''}>
+                    {/* 조건부 렌더링: lecture가 있으면 내용을 표시 */}
+                    {lecture ? `${lecture.title} (${lecture.professor})` : ''}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

@@ -12,7 +12,7 @@ function DetailPage() {
       fetchLectureById(id);
     }
   }, [id, fetchLectureById]);
-  
+
   const handleDelete = async () => {
     if (window.confirm('삭제하시겠습니까?')) {
       await deleteLecture(id);
@@ -21,63 +21,81 @@ function DetailPage() {
     }
   };
 
-  // 구현 과정
+  const renderLevelLabel = (level) => {
+    const numLevel = parseInt(level, 10);
+    switch (numLevel) {
+      case 1:
+        return '많음';
+      case 0:
+        return '보통';
+      case -1:
+        return '적음';
+      default:
+        return '정보 없음';
+    }
+  };
+
   if (isLoading) {
-    return React.createElement('div', null, '로딩 중...');
+    return <div>로딩 중...</div>;
   }
 
   if (error) {
-    return React.createElement('div', null, `에러: ${error}`);
+    return <div>에러: {error}</div>;
   }
 
   if (!selectedLecture) {
-    return null;
+    return null; // 데이터가 아직 없으면 아무것도 렌더링하지 않음
   }
 
-  return React.createElement('div', null,
-    React.createElement('h2', null, selectedLecture.title),
-    React.createElement('p', null,
-      React.createElement('strong', null, '교수님: '),
-      selectedLecture.prof
-    ),
-    React.createElement('p', null,
-      React.createElement('strong', null, '요일: '),
-      selectedLecture.day
-    ),
-    React.createElement('p', null,
-      React.createElement('strong', null, '시간: '),
-      selectedLecture.startTime
-    ),
-    React.createElement('p', null,
-      React.createElement('strong', null, '장소: '),
-      selectedLecture.place
-    ),
-    React.createElement('p', null,
-      React.createElement('strong', null, '학점: '),
-      selectedLecture.credits
-    ),
-    React.createElement('p', null,
-      React.createElement('strong', null, '과제량: '),
-      selectedLecture.assignments
-    ),
-    React.createElement('p', null,
-      React.createElement('strong', null, '팀플: '),
-      selectedLecture.project
-    ),
-    React.createElement('p', null,
-      React.createElement('strong', null, '성적: '),
-      selectedLecture.grade
-    ),
-    React.createElement('p', null,
-      React.createElement('strong', null, '영어비율: '),
-      selectedLecture.eng
-    ),
-    React.createElement('div', { style: { marginTop: '1rem' } },
-      React.createElement(Link, { to: `/edit/${selectedLecture.id}` },
-        React.createElement('button', null, '수정')
-      ),
-      React.createElement('button', { onClick: handleDelete, style: { marginLeft: '0.5rem' } }, '삭제')
-    )
+  return (
+    <div>
+      <h2>{selectedLecture.title}</h2>
+      <p>
+        <strong>교수님: </strong>
+        {selectedLecture.professor} {/* prof -> professor로 수정 */}
+      </p>
+      <p>
+        <strong>요일: </strong>
+        {selectedLecture.day}
+      </p>
+      <p>
+        <strong>시간: </strong>
+        {/* startTime과 endTime을 함께 표시하도록 개선 */}
+        {`${selectedLecture.startTime} - ${selectedLecture.endTime}`}
+      </p>
+      <p>
+        <strong>장소: </strong>
+        {selectedLecture.place}
+      </p>
+      <p>
+        <strong>학점: </strong>
+        {selectedLecture.credits}
+      </p>
+      <p>
+        <strong>과제량: </strong>
+        {renderLevelLabel(selectedLecture.assignments)}
+      </p>
+      <p>
+        <strong>팀플: </strong>
+        {renderLevelLabel(selectedLecture.project)}
+      </p>
+      <p>
+        <strong>성적: </strong>
+        {renderLevelLabel(selectedLecture.grade)}
+      </p>
+      <p>
+        <strong>영어비율: </strong>
+        {selectedLecture.eng}%
+      </p>
+      <div style={{ marginTop: '1rem' }}>
+        <Link to={`/edit/${selectedLecture.id}`}>
+          <button>수정</button>
+        </Link>
+        <button onClick={handleDelete} style={{ marginLeft: '0.5rem' }}>
+          삭제
+        </button>
+      </div>
+    </div>
   );
 }
 
