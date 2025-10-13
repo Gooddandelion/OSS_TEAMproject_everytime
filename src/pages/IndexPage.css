@@ -1,0 +1,29 @@
+.timetable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid black;
+  margin-top: 1rem;
+}
+
+.timetable th,
+.timetable td {
+  border: 1px solid black;
+  padding: 8px;
+  height: 50px; /* 셀의 높이를 고정하여 표를 보기 좋게 만듭니다. */
+}
+
+.timetable th {
+  background-color: #f2f2f2;
+}
+
+.timetable .time-label {
+  font-weight: bold;
+  text-align: center;
+}
+
+.timetable .lecture-cell {
+  background-color: #e7f5ff;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.9em;
+}

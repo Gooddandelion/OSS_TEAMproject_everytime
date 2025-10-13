@@ -1,0 +1,16 @@
+.list-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.list-table th,
+.list-table td {
+  border: 1px solid #ccc;
+  padding: 12px;
+}
+
+.list-table th {
+  background-color: #f2f2f2;
+}
