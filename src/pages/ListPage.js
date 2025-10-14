@@ -5,7 +5,7 @@ import './ListPage.css';
 
 function ListPage() {
   const { lectures, isLoading, error, fetchLectures } = useLectureStore();
-  const tableHeaders = ['과목명', '교수님', '요일', '시간', '장소', '학점', '상세보기'];
+  const tableHeaders = ['강의명', '교수님', '강의시간', '평점', '학점', '이수구분', '세부정보'];
 
   useEffect(() => {
     fetchLectures();
@@ -37,12 +37,12 @@ function ListPage() {
         <tbody>
           {lectures.map(lecture => (
             <tr key={lecture.id}>
-              <td>{lecture.title}</td>
-              <td>{lecture.professor}</td>
-              <td>{lecture.day}</td>
-              <td>{`${lecture.startTime} - ${lecture.endTime}`}</td>
-              <td>{lecture.place}</td>
-              <td>{lecture.credits}</td>
+              <td>{lecture.강의명}</td>
+              <td>{lecture.교수님}</td>
+              <td>{lecture.강의시간}</td>
+              <td>{lecture.평점}</td>
+              <td>{lecture.학점}</td>
+              <td>{lecture.이수구분}</td>
               <td>
                 <Link to={`/detail/${lecture.id}`}>보기</Link>
               </td>

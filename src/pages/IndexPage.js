@@ -48,7 +48,7 @@ function IndexPage() {
                 return (
                   <td key={`${day}-${time}`} className={lecture ? 'lecture-cell' : ''}>
                     {/* 조건부 렌더링: lecture가 있으면 내용을 표시 */}
-                    {lecture ? `${lecture.title} (${lecture.professor})` : ''}
+                    {lecture ? `${lecture.강의명} (${lecture.교수님})` : ''}
                   </td>
                 );
               })}
