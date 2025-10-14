@@ -4,12 +4,16 @@ import useLectureStore from '../store/lectureStore';
 import './ListPage.css';
 
 function ListPage() {
-  const { lectures, isLoading, error, fetchLectures } = useLectureStore();
-  const tableHeaders = ['강의명', '교수님', '강의시간', '평점', '학점', '이수구분', '세부정보'];
+  const { lectures, myLectures, isLoading, error, fetchLectures, fetchMyLectures, addLectureToMyList, removeLectureFromMyList} = useLectureStore();
+  
+  const allTableHeaders = ['강의명', '교수님', '강의시간', '평점', '학점', '세부정보', '추가'];
+  const myTableHeaders = ['강의명', '교수님', '강의시간', '학점', '세부정보', '삭제'];
+
 
   useEffect(() => {
     fetchLectures();
-  }, [fetchLectures]);
+    fetchMyLectures();
+  }, [fetchLectures, fetchMyLectures]);
 
   if (isLoading) {
     return <div>로딩 중...</div>;
@@ -20,38 +24,81 @@ function ListPage() {
   }
 
   return (
-    <div>
-      <h2>강의 목록</h2>
+  <div>
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <h2>강의 목록 관리</h2>
       <Link to="/add">
-        <button>새 강의 추가하기</button>
+        <button>새 강의 등록하기</button>
       </Link>
-
-      <table className="list-table">
-        <thead>
-          <tr>
-            {tableHeaders.map(header => (
-              <th key={header}>{header}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {lectures.map(lecture => (
-            <tr key={lecture.id}>
-              <td>{lecture.강의명}</td>
-              <td>{lecture.교수님}</td>
-              <td>{lecture.강의시간}</td>
-              <td>{lecture.평점}</td>
-              <td>{lecture.학점}</td>
-              <td>{lecture.이수구분}</td>
-              <td>
-                <Link to={`/detail/${lecture.id}`}>보기</Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
-  );
+
+    {/* ✨ 1. 전체를 감싸는 list-container div를 추가합니다. */}
+    <div className="list-container">
+
+      {/* --- 모든 강의 목록 섹션 --- */}
+      {/* ✨ 2. 첫 번째 테이블 섹션을 column div로 묶습니다. */}
+      <div className="list-column">
+        <h3>모든 강의 목록</h3>
+        <table className="list-table">
+          <thead>
+            <tr>
+              {allTableHeaders.map(header => <th key={header}>{header}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {lectures.map(lecture => (
+              <tr key={lecture.id}>
+                <td>{lecture.강의명}</td>
+                <td>{lecture.교수님}</td>
+                <td>{Array.isArray(lecture.강의시간) ? lecture.강의시간.join(' / ') : lecture.강의시간}</td>
+                <td>{lecture.평점}</td>
+                <td>{lecture.학점}</td>
+                <td><Link to={`/detail/${lecture.id}`}>보기</Link></td>
+                <td>
+                  <button onClick={() => addLectureToMyList(lecture)}>추가</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* --- 나의 수강 강의 목록 섹션 --- */}
+      {/* ✨ 3. 두 번째 테이블 섹션도 column div로 묶습니다. */}
+      <div className="list-column">
+        <h3>나의 수강 강의 목록</h3>
+        <table className="list-table">
+          <thead>
+            <tr>
+              {myTableHeaders.map(header => <th key={header}>{header}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {myLectures.length > 0 ? (
+              myLectures.map(lecture => (
+                <tr key={lecture.id}>
+                  <td>{lecture.강의명}</td>
+                  <td>{lecture.교수님}</td>
+                  <td>{Array.isArray(lecture.강의시간) ? lecture.강의시간.join(' / ') : lecture.강의시간}</td>
+                  <td>{lecture.학점}</td>
+                  <td><Link to={`/detail/${lecture.id}`}>보기</Link></td>
+                  <td>
+                    <button onClick={() => removeLectureFromMyList(lecture.id)}>삭제</button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={myTableHeaders.length}>추가된 강의가 없습니다.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {/* ✨ 4. <hr> 태그는 더 이상 필요 없으므로 삭제합니다. */}
+  </div>
+);
 }
 
 export default ListPage;

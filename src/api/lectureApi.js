@@ -1,5 +1,7 @@
 import client from './client'; 
 
+//oss-team
+
 // 모든 강의 목록 가져오기 (GET /lecture)
 export const getLectures = () => client.get('/oss-team');
 
@@ -14,3 +16,14 @@ export const deleteLecture = (id) => client.delete(`/oss-team/${id}`);
 
 // 강의 수정하기 (PUT /employee/:id) 
 export const updateLecture = (id, lectureData) => client.put(`/oss-team/${id}`, lectureData);
+
+//mylectures
+
+// 나의 강의 목록 전체 조회 (GET /mylectures)
+export const getMyLectures = () => client.get('/mylectures');
+
+// 나의 강의 목록에 추가 (POST /mylectures)
+export const addMyLecture = (lectureData) => client.post('/mylectures', lectureData);
+
+// 나의 강의 목록에서 삭제 (DELETE /mylectures/:id)
+export const deleteMyLecture = (id) => client.delete(`/mylectures/${id}`);

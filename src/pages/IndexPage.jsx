@@ -4,24 +4,26 @@ import useLectureStore from '../store/lectureStore';
 import './IndexPage.css';
 
 function IndexPage() {
-  const { lectures, isLoading, error, fetchLectures } = useLectureStore();
+  const { myLectures, isLoading, error, fetchMyLectures } = useLectureStore();
 
   useEffect(() => {
-    fetchLectures();
-  }, [fetchLectures]);
+    fetchMyLectures();
+  }, [fetchMyLectures]);
 
-  // 시간표의 시간대와 요일 정의 (로직은 동일)
-  const timeSlots = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
-  const days = ['월', '화', '수', '목', '금'];
+  const timeSlots = ['1교시', '2교시', '3교시', '4교시', '5교시', '6교시', '7교시', '8교시', '9교시'];
+  const days = ['월요일', '화요일', '수요일', '목요일', '금요일'];
 
   const findLecture = (day, time) => {
-    return lectures.find(lecture => lecture.day === day && lecture.startTime === time);
+    return myLectures.find(lecture => 
+      Array.isArray(lecture.강의시간) && 
+      lecture.강의시간.includes(day) && 
+      lecture.강의시간.includes(time)
+    ); 
   };
 
   if (isLoading) { return <div>로딩 중...</div>; }
   if (error) { return <div>에러: {error}</div>; }
 
-  // React.createElement 대신 JSX 문법으로 화면을 구성합니다.
   return (
     <div>
       <h2>나의 시간표</h2>
@@ -33,7 +35,6 @@ function IndexPage() {
         <thead>
           <tr>
             <th>시간</th>
-            {/* JavaScript의 map 함수를 {} 안에 직접 사용 */}
             {days.map(day => (
               <th key={day}>{day}</th>
             ))}
@@ -47,7 +48,6 @@ function IndexPage() {
                 const lecture = findLecture(day, time);
                 return (
                   <td key={`${day}-${time}`} className={lecture ? 'lecture-cell' : ''}>
-                    {/* 조건부 렌더링: lecture가 있으면 내용을 표시 */}
                     {lecture ? `${lecture.강의명} (${lecture.교수님})` : ''}
                   </td>
                 );
