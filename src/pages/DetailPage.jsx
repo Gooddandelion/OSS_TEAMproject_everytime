@@ -30,7 +30,7 @@ function DetailPage() {
   }
 
   if (!selectedLecture) {
-    return null; 
+    return null;
   }
 
   return (
@@ -38,7 +38,7 @@ function DetailPage() {
       <h2>{selectedLecture.강의명}</h2>
       <p>
         <strong>교수님: </strong>
-        {selectedLecture.교수님} 
+        {selectedLecture.교수님}
       </p>
       <p>
         <strong>과제량: </strong>
@@ -65,8 +65,10 @@ function DetailPage() {
         {selectedLecture.시험횟수}
       </p>
       <p>
-         <strong>강의시간: </strong>
-        {selectedLecture.강의시간.join(' / ')}
+        <strong>강의시간: </strong>
+        {Array.isArray(selectedLecture.강의시간)
+          ? selectedLecture.강의시간.join(' / ')
+          : selectedLecture.강의시간}
       </p>
       <p>
         <strong>이수구분: </strong>

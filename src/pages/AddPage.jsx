@@ -10,11 +10,11 @@ function AddPage() {
     const [form, setForm] = useState({
         강의명: '',
         교수님: '',
-        과제량: '',
+        과제량: '모름',
         평점: '',
-        조별과제횟수: '',
-        성적평가: '',
-        출석관리: '',
+        조별과제횟수: '모름',
+        성적평가: '모름',
+        출석관리: '모름',
         시험횟수: '',
         강의시간: '',
         이수구분: '',
@@ -32,12 +32,19 @@ function AddPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // 🐛 BUG FIX: prof -> professor로 수정
-        if (!form.title || !form.professor) {
+        if (!form.강의명 || !form.교수님) {
             alert('과목명과 교수님 이름은 필수 항목입니다.');
             return;
         }
-        await addLecture(form);
+
+        const lectureTimeArray = form.강의시간.split(',').map(item => item.trim());
+
+        const submissionData = {
+            ...form,
+            강의시간: lectureTimeArray,
+        };
+
+        await addLecture(submissionData);
         alert('강의가 성공적으로 추가되었습니다!');
         navigate('/list');
     };
@@ -57,9 +64,10 @@ function AddPage() {
                 <div>
                     <label>과제량: </label>
                     <select name="과제량" value={form.과제량} onChange={handleChange}>
-                        <option value="1">많음</option>
-                        <option value="0">보통</option>
-                        <option value="-1">적음</option>
+                        <option value="많음">많음</option>
+                        <option value="보통">보통</option>
+                        <option value="없음">없음</option>
+                        <option value="모름">모름</option>
                     </select>
                 </div>
                 <div>
@@ -69,24 +77,27 @@ function AddPage() {
                 <div>
                     <label>조별과제횟수</label>
                     <select name="과제량" value={form.과제량} onChange={handleChange}>
-                        <option value="1">많음</option>
-                        <option value="0">보통</option>
-                        <option value="-1">없음</option>
+                        <option value="많음">많음</option>
+                        <option value="보통">보통</option>
+                        <option value="없음">없음</option>
+                        <option value="모름">모름</option>
                     </select>
                 </div>
                 <div>
                     <label>성적평가: </label>
                     <select name="성적평가" value={form.성적평가} onChange={handleChange}>
-                        <option value="1">너그러움</option>
-                        <option value="0">보통</option>
-                        <option value="-1">깐깐함</option>
+                        <option value="너그러움">너그러움</option>
+                        <option value="보통">보통</option>
+                        <option value="깐깐함">깐깐함</option>
+                        <option value="모름">모름</option>
                     </select>
                 </div>
                 <div>
                     <label>출석관리: </label>
-                    <select name="assignments" value={form.assignments} onChange={handleChange}>
-                        <option value="1">전자출결</option>
-                        <option value="-1">직접호명</option>
+                    <select name="출석관리" value={form.출석관리} onChange={handleChange}>
+                        <option value="전자출결">전자출결</option>
+                        <option value="직접호명">직접호명</option> 
+                        <option value="모름">모름</option>
                     </select>
                 </div>
                 <div>
@@ -95,7 +106,7 @@ function AddPage() {
                 </div>
                 <div>
                     <label>강의시간: </label>
-                    <input type="text" name="강의시간" value={form.강의시간} onChange={handleChange} />
+                    <input type="text" name="강의시간" value={form.강의시간} onChange={handleChange} placeholder="예: 월요일,목요일,1교시" />
                 </div>
                 <div>
                     <label>이수구분: </label>
