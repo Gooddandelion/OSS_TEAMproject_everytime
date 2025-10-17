@@ -32,11 +32,8 @@ function ListPage() {
       </Link>
     </div>
 
-    {/* ✨ 1. 전체를 감싸는 list-container div를 추가합니다. */}
     <div className="list-container">
 
-      {/* --- 모든 강의 목록 섹션 --- */}
-      {/* ✨ 2. 첫 번째 테이블 섹션을 column div로 묶습니다. */}
       <div className="list-column">
         <h3>모든 강의 목록</h3>
         <table className="list-table">
@@ -62,9 +59,7 @@ function ListPage() {
           </tbody>
         </table>
       </div>
-
-      {/* --- 나의 수강 강의 목록 섹션 --- */}
-      {/* ✨ 3. 두 번째 테이블 섹션도 column div로 묶습니다. */}
+      
       <div className="list-column">
         <h3>나의 수강 강의 목록</h3>
         <table className="list-table">
@@ -96,7 +91,6 @@ function ListPage() {
         </table>
       </div>
     </div>
-    {/* ✨ 4. <hr> 태그는 더 이상 필요 없으므로 삭제합니다. */}
   </div>
 );
 }

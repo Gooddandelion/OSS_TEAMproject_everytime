@@ -13,6 +13,18 @@ function DetailPage() {
     }
   }, [id, fetchLectureById]);
 
+   const renderLevelLabel = (level) => {
+    const numLevel = parseInt(level, 10);
+    switch (numLevel) {
+      case 1:
+        return 'O';
+      case 0:
+        return 'X';
+      default:
+        return '정보 없음';
+    }
+  };
+
   const handleDelete = async () => {
     if (window.confirm('삭제하시겠습니까?')) {
       await deleteLecture(id);
@@ -79,9 +91,18 @@ function DetailPage() {
         {selectedLecture.학점}
       </p>
       <p>
+        <strong>BSM여부: </strong>
+        {renderLevelLabel(selectedLecture.BSM여부)}
+      </p>
+      <p>
+        <strong>설계학점: </strong>
+        {selectedLecture.설계학점}
+      </p>
+      <p>
         <strong>영어비율: </strong>
         {selectedLecture.영어비율}%
       </p>
+      
       <div style={{ marginTop: '1rem' }}>
         <Link to={`/edit/${selectedLecture.id}`}>
           <button>수정</button>

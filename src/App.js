@@ -14,7 +14,7 @@ function App() {
       <Routes>
         {/* 초기 페이지 */}
         <Route path="/" element={<IndexPage />} />
-
+        
         <Route path="/list" element={<ListPage />} />
         <Route path="/add" element={<AddPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />

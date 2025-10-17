@@ -19,7 +19,10 @@ function AddPage() {
         강의시간: '',
         이수구분: '',
         학점: '',
+        BSM여부: '',
+        설계학점: '',
         영어비율: ''
+
     });
 
     const handleChange = (e) => {
@@ -115,6 +118,17 @@ function AddPage() {
                 <div>
                     <label>학점: </label>
                     <input type="number" name="학점" value={form.학점} onChange={handleChange} />
+                </div>
+                <div>
+                    <label>BSM여부: </label>
+                    <select name="출석관리" value={form.출석관리} onChange={handleChange}>
+                        <option value="1">O</option>
+                        <option value="0">X</option> 
+                    </select>
+                </div>
+                <div>
+                    <label>설계학점: </label>
+                    <input type="number" name="설계학점" value={form.설계학점} onChange={handleChange} />
                 </div>
                 <div>
                     <label>영어비율(%): </label>
