@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import * as lectureApi from '../api/lectureApi';
+import * as lectureApi from '../api/lectureApi.js';
 
 const useLectureStore = create((set, get) => ({
     // --- 상태 (State) ---

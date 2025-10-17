@@ -24,12 +24,27 @@ function IndexPage() {
   if (isLoading) { return <div>로딩 중...</div>; }
   if (error) { return <div>에러: {error}</div>; }
 
+  const buttonStyle = {
+    margin: '10px',
+    padding: '10px 20px',
+    borderRadius: '8px',
+    border: 'none',
+    cursor: 'pointer',
+    fontWeight: 'bold'
+  };
+
   return (
     <div>
       <h2>나의 시간표</h2>
       <Link to="/list">
         <button>강의 목록 관리</button>
       </Link>
+
+      <Link to="/chat">
+          <button style={{ ...buttonStyle, backgroundColor: '#f91f15', color: '#fff' }}>
+            강의 도우미(Chat)
+          </button>
+        </Link>
 
       <table className="timetable">
         <thead>
