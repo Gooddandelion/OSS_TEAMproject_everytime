@@ -4,7 +4,7 @@ import ListPage from './pages/ListPage';
 import AddPage from './pages/AddPage';
 import DetailPage from './pages/DetailPage';
 import EditPage from './pages/EditPage';
-import IndexPage from './pages/IndexPage.js';
+import IndexPage from './pages/IndexPage';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <Routes>
         {/* 초기 페이지 */}
         <Route path="/" element={<IndexPage />} />
-
+        
         <Route path="/list" element={<ListPage />} />
         <Route path="/add" element={<AddPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
