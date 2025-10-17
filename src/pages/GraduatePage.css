@@ -1,0 +1,81 @@
+/* 전체 컨테이너 */
+.graduate-container {
+    width: 80%;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px 40px;
+    background-color: #fcfcfc;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Pretendard', sans-serif;
+    color: #292929;
+  }
+  
+  /* 제목 */
+  .graduate-container h2 {
+    color: #f91f15;
+    margin-bottom: 30px;
+    font-size: 28px;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  
+  /* 졸업 진행도 항목 */
+  .graduate-progress {
+    margin-bottom: 25px;
+    padding: 15px 20px;
+    background-color: #fcfcfc;
+    border-left: 6px solid #f91f15;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* 필수/선택 과목 제목 */
+  .graduate-progress strong {
+    font-size: 18px;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+  
+  /* 완료된 과목 */
+  .completed {
+    color: #292929;
+    font-weight: 600;
+  }
+  
+  /* 미수강 과목 강조 */
+  .missing {
+    color: #f91f15;
+    font-weight: 600;
+  }
+  
+  /* 학점 영역 */
+  .graduate-progress div {
+    margin-top: 5px;
+    font-size: 16px;
+  }
+  
+  /* 차트 영역 */
+  .graduate-chart {
+    margin-top: 35px;
+    padding: 20px;
+    background-color: #fcfcfc;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Bar 차트 바 색상 */
+  .bar-legend {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  
+  .bar-legend span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0 8px;
+    border-radius: 4px;
+  }
+  
