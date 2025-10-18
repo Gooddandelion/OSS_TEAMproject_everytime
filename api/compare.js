@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   try {
     const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-    const MOCK_API = "https://68ddd354d7b591b4b78d973a.mockapi.io/oss-team";
+    const MOCK_API = "https://68ddd354d7b591b4b78d973a.mockapi.io/oss-team-compare";
     const r = await fetch(MOCK_API);
     const data = await r.json();
 
