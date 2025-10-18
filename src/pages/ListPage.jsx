@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useLectureStore from '../store/lectureStore';
 import './ListPage.css';
@@ -9,6 +9,7 @@ function ListPage() {
   const allTableHeaders = ['강의명', '교수님', '강의시간', '평점', '학점', '세부정보', '추가'];
   const myTableHeaders = ['강의명', '교수님', '강의시간', '학점', '세부정보', '삭제'];
 
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetchLectures();
@@ -23,14 +24,22 @@ function ListPage() {
     return <div>에러: {error}</div>;
   }
 
+  const filteredLectures = lectures.filter(lecture =>
+    lecture.강의명.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    lecture.교수님.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
   <div>
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <h2>강의 목록 관리</h2>
+
+      <input type="text" value={searchTerm} placeholder="강의명 또는 교수님으로 검색" onChange={(e) => setSearchTerm(e.target.value)} style={{width: '30%', padding: '8px', marginBottom: '1rem'}}/> 
+
       <Link to="/add">
         <button>새 강의 등록하기</button>
       </Link>
-    </div>
+    </div>  
 
     <div className="list-container">
 
@@ -43,7 +52,7 @@ function ListPage() {
             </tr>
           </thead>
           <tbody>
-            {lectures.map(lecture => (
+            {filteredLectures.map(lecture => (
               <tr key={lecture.id}>
                 <td>{lecture.강의명}</td>
                 <td>{lecture.교수님}</td>
