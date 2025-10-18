@@ -1,14 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useLectureStore from '../store/lectureStore';
+import { getRandomQuote } from '../api/quoteAPI';
 import './IndexPage.css';
 
 function IndexPage() {
   const { myLectures, isLoading, error, fetchMyLectures } = useLectureStore();
+  const [quote, setQuote] = useState({ content: '명언을 불러오는 중...', author: '' });
 
   useEffect(() => {
     fetchMyLectures();
   }, [fetchMyLectures]);
+
+  useEffect(() => {
+    const fetchQuote = async () => {
+      try {
+        const response = await getRandomQuote();
+        setQuote({
+          content: response.data.content,
+          author: response.data.author,
+        });
+      } catch (err) {
+        setQuote({ content: '명언을 불러오는 데 실패했습니다.', author: '' });
+      }
+    };
+
+    fetchQuote();
+  }, []);
 
   const timeSlots = ['1교시', '2교시', '3교시', '4교시', '5교시', '6교시', '7교시', '8교시', '9교시'];
   const days = ['월요일', '화요일', '수요일', '목요일', '금요일'];
@@ -48,7 +66,12 @@ function IndexPage() {
           <button style={{ ...buttonStyle, backgroundColor: '#f91f15', color: '#fff' }}>
             강의 도우미(Chat)
           </button>
-        </Link>
+      </Link>
+
+      <div className="quote-widget">
+          <p>"{quote.content}"</p>
+          <strong>- {quote.author} -</strong>
+      </div>
 
       <table className="timetable">
         <thead>
