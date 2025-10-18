@@ -9,11 +9,14 @@ function ListPage() {
   const allTableHeaders = ['강의명', '교수님', '강의시간', '평점', '학점', '세부정보', '추가'];
   const myTableHeaders = ['강의명', '교수님', '강의시간', '학점', '세부정보', '삭제'];
 
+  const [inputValue, setInputValue] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  
+  
 
   useEffect(() => {
     fetchLectures();
-    fetchMyLectures();
+    fetchMyLectures(); 
   }, [fetchLectures, fetchMyLectures]);
 
   if (isLoading) {
@@ -34,7 +37,13 @@ function ListPage() {
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <h2>강의 목록 관리</h2>
 
-      <input type="text" value={searchTerm} placeholder="강의명 또는 교수님으로 검색" onChange={(e) => setSearchTerm(e.target.value)} style={{width: '30%', padding: '8px', marginBottom: '1rem'}}/> 
+      <input 
+        type="text" 
+        value={inputValue} 
+        placeholder="강의명 또는 교수님으로 검색" 
+        onChange={(e) => setInputValue(e.target.value)} 
+      /> 
+      <button onClick={()=> setSearchTerm(inputValue)}>검색</button>
 
       <Link to="/add">
         <button>새 강의 등록하기</button>
