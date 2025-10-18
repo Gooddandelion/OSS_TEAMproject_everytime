@@ -22,7 +22,7 @@ export default async function handler(req, res) {
       .join("\n");
 
     const completion = await groq.chat.completions.create({
-      model: "openai/gpt-oss-20b",
+      model: "llama-3.3-70b-versatile",
       messages: [
         {
           role: "system",
