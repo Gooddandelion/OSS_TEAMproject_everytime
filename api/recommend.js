@@ -27,7 +27,7 @@ export default async function handler(req, res) {
         {
           role: "system",
           content:
-            "너는 한동대학교 수업 추천 도우미야. 제공된 데이터만 근거해서 추천해. 데이터에 없는 내용은 '데이터에 없습니다.'라고 답해. 요일은 '월요일 3교시'처럼 말해줘.",
+            "너는 한동대학교 수업 추천 도우미야. 제공된 데이터만 근거해서 추천해. 요일은 '월요일 3교시'처럼 말해줘.",
         },
         { role: "user", content: `강의 데이터:\n${context}\n\n질문: ${question}` },
       ],

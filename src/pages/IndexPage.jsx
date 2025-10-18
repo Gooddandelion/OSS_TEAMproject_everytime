@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useLectureStore from '../store/lectureStore';
-import { getRandomQuote } from '../api/quoteAPI.js';
+import { getRandomQuote } from '../api/quoteAPI';
 import './IndexPage.css';
 
 function IndexPage() {
