@@ -40,6 +40,10 @@ function IndexPage() {
         <button>강의 목록 관리</button>
       </Link>
 
+      <Link to="/graduate">
+        <button>졸업 진행도</button>
+      </Link>
+
       <Link to="/chat">
           <button style={{ ...buttonStyle, backgroundColor: '#f91f15', color: '#fff' }}>
             강의 도우미(Chat)
