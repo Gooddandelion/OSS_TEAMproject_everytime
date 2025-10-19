@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useLectureStore from '../store/lectureStore';
+import './EditPage.css';
 
 function EditPage() {
     const { id } = useParams();
@@ -64,7 +65,7 @@ function EditPage() {
     };
 
     return (
-        <div>
+        <div className="edit-page">
             <h2>강의 정보 수정</h2>
             <form onSubmit={handleSubmit}>
                 <div>

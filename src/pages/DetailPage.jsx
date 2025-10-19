@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import useLectureStore from '../store/lectureStore';
+import './DetailPage.css';
 
 function DetailPage() {
   const { id } = useParams();
@@ -46,7 +47,7 @@ function DetailPage() {
   }
 
   return (
-    <div>
+    <div className="detail-page">
       <h2>{selectedLecture.강의명}</h2>
       <p>
         <strong>교수님: </strong>
