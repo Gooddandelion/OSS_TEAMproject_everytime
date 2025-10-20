@@ -1,29 +1,140 @@
-.timetable {
-  border-collapse: collapse;
-  width: 100%;
-  border: 1px solid black;
-  margin-top: 1rem;
+/* 전체 컨테이너: 왼쪽 프로필, 오른쪽 시간표 */
+.index-container {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem 2rem;
+  flex-wrap: nowrap; /* 한 줄에 배치 */
+  align-items: flex-start; /* 상단 정렬 */
 }
 
-.timetable th,
-.timetable td {
-  border: 1px solid black;
-  padding: 8px;
-  height: 50px; /* 셀의 높이를 고정하여 표를 보기 좋게 만듭니다. */
+/* 왼쪽 프로필 */
+.profile-section {
+  width: 250px;
+  background-color: #fcfcfc;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  flex-shrink: 0; /* 줄어들지 않도록 */
+}
+
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #f91f15;
+  margin-bottom: 1rem;
+}
+
+.profile-section h3 {
+  margin: 0.5rem 0;
+}
+
+/* 오른쪽 메인 영역 (시간표) */
+.main-section {
+  flex: 1; /* 남은 공간 채움 */
+  display: flex;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+}
+
+/* 오른쪽 메인 영역 (시간표) */
+.main-section {
+  flex: 1 1 600px; /* 최소 600px, 공간 남으면 늘어남 */
+  display: flex;
+  justify-content: flex-end; /* 시간표를 오른쪽으로 */
+}
+
+/* 버튼 공통 (상단에 그대로) */
+.main-btn {
+  margin: 5px 5px 10px 0;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #f91f15;
+  color: #fff;
+  transition: all 0.3s;
+}
+
+.main-btn:hover {
+  background-color: #292929;
+  color: #fff;
+}
+
+/* 시간표 스타일 */
+.timetable {
+  width: 95%;        /* 전체 폭은 유지 */
+  font-size: 0.9rem;  /* 글자 크기 약간 축소 */
+  border-collapse: collapse;
+}
+
+
+.timetable th, .timetable td {
+  border: 1px solid #292929;
+  padding: 5px;
+  height: 55px;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .timetable th {
-  background-color: #f2f2f2;
+  background-color: #6c6b6b;
+  color: #fcfcfc;
+  font-weight: bold;
 }
 
 .timetable .time-label {
+  background-color: #f5f5f5;
+  color: #292929;
   font-weight: bold;
-  text-align: center;
 }
 
 .timetable .lecture-cell {
-  background-color: #e7f5ff;
+  background-color: #f91f15;
+  color: #fcfcfc;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.timetable .lecture-cell:hover {
+  background-color: #292929;
+}
+
+.quote-widget {
+  background-color: #292929;
+  color: #fcfcfc;
+  border-left: 5px solid #f91f15;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
   text-align: center;
-  vertical-align: middle;
-  font-size: 0.9em;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.quote-widget p {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.quote-widget strong {
+  font-size: 0.9rem;
+  color: #f91f15;
+}
+
+.content-container {
+  display: flex;
+  gap: 2rem; /* 프로필과 시간표 사이 간격 */
+}
+
+.right-section {
+  flex: 1; /* 남은 공간을 시간표가 차지 */
+}
+
+.top-bar h2 {
+  text-align: center;
+  margin-bottom: 1rem; /* 원하면 아래 여백 추가 */
+  font-size: 35px;
 }

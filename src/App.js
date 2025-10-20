@@ -12,8 +12,6 @@ import GraduatePage from './pages/GraduatePage.jsx';
 function App() {
   return (
     <div>
-      <h1>test</h1>
-      <hr />
       <Routes>
         {/* 초기 페이지 */}
         <Route path="/" element={<IndexPage />} />

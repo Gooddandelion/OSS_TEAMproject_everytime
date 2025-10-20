@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useLectureStore from '../store/lectureStore';
+import './AddPage.css';
+
 
 function AddPage() {
     const navigate = useNavigate();
@@ -53,7 +55,7 @@ function AddPage() {
     };
 
     return (
-        <div>
+        <div className="add-page">
             <h2>새로운 강의 추가</h2>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -134,7 +136,7 @@ function AddPage() {
                     <label>영어비율(%): </label>
                     <input type="number" name="영어비율" value={form.영어비율} onChange={handleChange} />
                 </div>
-                <button type="submit" style={{ marginTop: '1rem' }}>제출하기</button>
+                <button type="submit" style={{ marginTop: '1rem' }}>새 강의 추가하기</button>
             </form >
         </div >
     );
