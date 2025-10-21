@@ -1,0 +1,78 @@
+/* ===== EditPage.css ===== */
+
+/* 전체 페이지 배경/폰트 */
+.edit-page {
+    background-color: #fcfcfc;
+    color: #292929;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    border-radius: 8px;
+  }
+  
+  /* 제목 */
+  .edit-page h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #292929;
+    border-bottom: 2px solid #f91f15;
+    padding-bottom: 0.5rem;
+  }
+  
+  /* 폼 컨테이너 */
+  .edit-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* 각 입력 필드 */
+  .edit-page form div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* 레이블 */
+  .edit-page label {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+    color: #292929;
+  }
+  
+  /* 입력창 */
+  .edit-page input[type="text"],
+  .edit-page input[type="number"],
+  .edit-page select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s ease;
+  }
+  
+  .edit-page input:focus,
+  .edit-page select:focus {
+    border-color: #f91f15;
+    box-shadow: 0 0 4px rgba(249, 31, 21, 0.5);
+  }
+  
+  /* 제출 버튼 */
+  .edit-page button[type="submit"] {
+    background-color: #292929;
+    color: #fcfcfc;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+  }
+  
+  .edit-page button[type="submit"]:hover {
+    background-color: #f91f15;
+  }
+  
