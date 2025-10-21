@@ -1,27 +1,79 @@
+/* ===== ListPage.css ===== */
+
+/* 전체 컨테이너 */
+.list-container {
+  display: flex;
+  gap: 30px;
+  margin-top: 1rem;
+}
+
+/* 컬럼별 flex 설정 */
+.list-column {
+  flex: 1;
+  min-width: 0;
+}
+
+/* 테이블 공통 스타일 */
 .list-table {
   width: 100%;
   border-collapse: collapse;
   text-align: center;
   margin-top: 1rem;
+  border: 1px solid #292929;
+  background-color: #fcfcfc;
 }
 
-.list-table th,
-.list-table td {
-  border: 1px solid #ccc;
-  padding: 12px;
-}
-
+/* 테이블 헤더 */
 .list-table th {
-  background-color: #f2f2f2;
+  background-color: #292929;
+  color: #fcfcfc;
+  padding: 12px;
+  font-weight: bold;
 }
 
-.list-container {
-  display: flex; /* ✨ 핵심: 자식 요소들을 가로로 배치합니다. */
-  gap: 30px; /* ✨ 두 테이블 사이의 간격을 줍니다. */
-  margin-top: 1rem;
+/* 테이블 셀 */
+.list-table td {
+  border: 1px solid #292929;
+  padding: 12px;
+  color: #292929;
+  background-color: #fcfcfc;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.list-column {
-  flex: 1; /* ✨ 두 컬럼이 가능한 공간을 1:1 비율로 똑같이 나누어 갖습니다. */
-  min-width: 0; /* 테이블이 너무 길어져서 레이아웃이 깨지는 것을 방지합니다. */
+/* 강조 셀 (예: 선택된 항목) */
+.list-table .highlight {
+  background-color: #f91f15;
+  color: #fcfcfc;
+  font-weight: bold;
 }
+
+/* 메인 버튼 (검색, 새 강의 등록하기) */
+.main-btn {
+  background-color: #292929;
+  color: #fcfcfc;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-left: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+/* 테이블 내 버튼 (추가, 삭제) */
+.table-btn {
+  background-color: #f91f15;
+  color: #fcfcfc;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.table-btn:hover {
+  background-color: #f91f15;
+  color: #fcfcfc;
+}
+
