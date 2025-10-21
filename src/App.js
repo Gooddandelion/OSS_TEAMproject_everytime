@@ -8,7 +8,6 @@ import IndexPage from './pages/IndexPage.jsx';
 import ChatPage from './pages/ChatPage.jsx';
 import GraduatePage from './pages/GraduatePage.jsx';
 
-
 function App() {
   return (
     <div>
