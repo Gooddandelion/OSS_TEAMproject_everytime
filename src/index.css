@@ -1,3 +1,17 @@
+/* 모바일 대응: 최대 600px */
+@media (max-width: 600px) {
+  body {
+    padding: 8px;
+    font-size: 0.97rem;
+  }
+  button {
+    padding: 7px 10px;
+    font-size: 0.97rem;
+  }
+  a {
+    font-size: 0.97rem;
+  }
+}
 /* 앱 전체의 기본 폰트와 여백을 설정합니다. */
 body {
   margin: 0;
@@ -29,5 +43,5 @@ a {
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration:dashed;
 }

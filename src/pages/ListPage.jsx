@@ -4,19 +4,34 @@ import useLectureStore from '../store/lectureStore';
 import './ListPage.css';
 
 function ListPage() {
-  const { lectures, myLectures, isLoading, error, fetchLectures, fetchMyLectures, addLectureToMyList, removeLectureFromMyList} = useLectureStore();
-  
-  const allTableHeaders = ['강의명', '교수님', '강의시간', '평점', '학점', '세부정보', '추가'];
-  const myTableHeaders = ['강의명', '교수님', '강의시간', '학점', '세부정보', '삭제'];
+  const { lectures, myLectures, isLoading, error, fetchLectures, fetchMyLectures, addLectureToMyList, removeLectureFromMyList } = useLectureStore();
+
+  const allTableHeaders = [
+    { label: '강의명', className: 'col-title' },
+    { label: '교수님', className: 'col-professor' },
+    { label: '강의시간', className: 'col-time' },
+    { label: '평점', className: 'col-rating' },
+    { label: '학점', className: 'col-credit' },
+    { label: '세부정보', className: 'col-actions' },
+    { label: '추가', className: 'col-actions' },
+  ];
+  const myTableHeaders = [
+    { label: '강의명', className: 'col-title' },
+    { label: '교수님', className: 'col-professor' },
+    { label: '강의시간', className: 'col-time' },
+    { label: '학점', className: 'col-credit' },
+    { label: '세부정보', className: 'col-actions' },
+    { label: '삭제', className: 'col-actions' },
+  ];
 
   const [inputValue, setInputValue] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  
-  
+
+
 
   useEffect(() => {
     fetchLectures();
-    fetchMyLectures(); 
+    fetchMyLectures();
   }, [fetchLectures, fetchMyLectures]);
 
   if (isLoading) {
@@ -37,7 +52,7 @@ function ListPage() {
       {/* 상단 검색/버튼 영역 */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
         <h2 style={{ margin: 0 }}>강의 목록 관리</h2>
-  
+
         <input
           type="text"
           value={inputValue}
@@ -52,61 +67,65 @@ function ListPage() {
             fontSize: '1rem'
           }}
         />
-  
+
         <button className="main-btn" onClick={() => setSearchTerm(inputValue)}>검색</button>
-  
+
         <Link to="/add">
           <button className="main-btn">새 강의 등록하기</button>
         </Link>
       </div>
-  
+
       {/* 테이블 영역 */}
       <div className="list-container">
-  
+
         <div className="list-column">
           <h3>모든 강의 목록</h3>
           <table className="list-table">
             <thead>
               <tr>
-                {allTableHeaders.map(header => <th key={header}>{header}</th>)}
+                {allTableHeaders.map(header =>
+                  <th key={header.label} className={header.className}>{header.label}</th>
+                )}
               </tr>
             </thead>
             <tbody>
               {filteredLectures.map(lecture => (
                 <tr key={lecture.id}>
-                  <td>{lecture.강의명}</td>
-                  <td>{lecture.교수님}</td>
-                  <td>{Array.isArray(lecture.강의시간) ? lecture.강의시간.join(' / ') : lecture.강의시간}</td>
-                  <td>{lecture.평점}</td>
-                  <td>{lecture.학점}</td>
-                  <td><Link to={`/detail/${lecture.id}`}>보기</Link></td>
-                  <td>
-                    <button className="table-btn" onClick={() => addLectureToMyList(lecture)}>추가</button>
+                  <td className="col-title">{lecture.강의명}</td>
+                  <td className="col-professor">{lecture.교수님}</td>
+                  <td className="col-time">{Array.isArray(lecture.강의시간) ? lecture.강의시간.join(' / ') : lecture.강의시간}</td>
+                  <td className="col-rating">{lecture.평점}</td>
+                  <td className="col-credit">{lecture.학점}</td>
+                  <td className="col-actions"><Link to={`/detail/${lecture.id}`}>보기</Link></td>
+                  <td className="col-actions">
+                    <button onClick={() => addLectureToMyList(lecture)}>추가</button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-  
+
         <div className="list-column">
           <h3>나의 수강 강의 목록</h3>
           <table className="list-table">
             <thead>
               <tr>
-                {myTableHeaders.map(header => <th key={header}>{header}</th>)}
+                {myTableHeaders.map(header =>
+                  <th key={header.label} className={header.className}>{header.label}</th>
+                )}
               </tr>
             </thead>
             <tbody>
               {myLectures.length > 0 ? (
                 myLectures.map(lecture => (
                   <tr key={lecture.id}>
-                    <td>{lecture.강의명}</td>
-                    <td>{lecture.교수님}</td>
-                    <td>{Array.isArray(lecture.강의시간) ? lecture.강의시간.join(' / ') : lecture.강의시간}</td>
-                    <td>{lecture.학점}</td>
-                    <td><Link to={`/detail/${lecture.id}`}>보기</Link></td>
-                    <td>
+                    <td className="col-title">{lecture.강의명}</td>
+                    <td className="col-professor">{lecture.교수님}</td>
+                    <td className="col-time">{Array.isArray(lecture.강의시간) ? lecture.강의시간.join(' / ') : lecture.강의시간}</td>
+                    <td className="col-credit">{lecture.학점}</td>
+                    <td className="col-actions"><Link to={`/detail/${lecture.id}`}>보기</Link></td>
+                    <td className="col-actions">
                       <button className="table-btn" onClick={() => removeLectureFromMyList(lecture.id)}>삭제</button>
                     </td>
                   </tr>
@@ -122,7 +141,7 @@ function ListPage() {
       </div>
     </div>
   );
-  
+
 }
 
 export default ListPage;

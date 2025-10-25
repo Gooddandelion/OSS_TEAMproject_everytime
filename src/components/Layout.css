@@ -1,0 +1,29 @@
+.app-header {
+  padding: 10px 2rem; /* 위아래 패딩을 줄여 높이를 낮춥니다. */
+  background-color: var(--header-bg-color);
+  border-bottom: 1px solid var(--border-color); /* 구분선을 border로 처리 */
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-link {
+  text-decoration: none; /* 링크 밑줄 제거 */
+  color: var(--primary-color); /* 1단계에서 정의한 메인 색상 사용 */
+}
+
+.logo-link h1 {
+  margin: 0; /* h1의 기본 마진 제거 */
+  font-size: 1.5rem; /* 로고 폰트 크기 조절 */
+}
+
+/* 모바일 버전 */
+@media (max-width: 600px) {
+  .app-header {
+    padding: 8px 12px;
+  }
+  .logo-link h1 {
+    font-size: 1.1rem;
+  }
+}

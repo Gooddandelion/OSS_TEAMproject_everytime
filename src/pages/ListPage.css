@@ -21,7 +21,15 @@
   margin-top: 1rem;
   border: 1px solid #292929;
   background-color: #fcfcfc;
+  table-layout: fixed;
 }
+
+.col-title { width: 25%; }
+.col-professor { width: 15%; }
+.col-time { width: 32%; }
+.col-rating { width: 8%; }
+.col-credit { width: 7%; }
+.col-actions { width: 13%; }
 
 /* 테이블 헤더 */
 .list-table th {
