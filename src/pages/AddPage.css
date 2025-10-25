@@ -27,24 +27,24 @@
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   /* 각 입력 필드 */
-  .add-page form div {
+  .add-page form div:not([class*="Mui"]) {
     display: flex;
     flex-direction: column;
   }
-  
+
   /* 레이블 */
-  .add-page label {
+  .add-page label:not([class*="Mui"]) {
     font-weight: bold;
     margin-bottom: 0.25rem;
     color: #292929;
   }
-  
+
   /* 입력창 */
-  .add-page input[type="text"],
-  .add-page input[type="number"],
-  .add-page select {
+  .add-page input[type="text"]:not([class*="Mui"]),
+  .add-page input[type="number"]:not([class*="Mui"]),
+  .add-page select:not([class*="Mui"]) {
     padding: 8px 12px;
     border-radius: 6px;
     border: 1px solid #ccc;
@@ -52,15 +52,15 @@
     outline: none;
     transition: all 0.2s ease;
   }
-  
-  .add-page input:focus,
-  .add-page select:focus {
+
+  .add-page input:not([class*="Mui"]):focus,
+  .add-page select:not([class*="Mui"]):focus {
     border-color: #f91f15;
     box-shadow: 0 0 4px rgba(249, 31, 21, 0.5);
   }
-  
+
   /* 제출 버튼 */
-  .add-page button[type="submit"] {
+  .add-page button[type="submit"]:not([class*="Mui"]) {
     background-color: #292929;
     color: #fcfcfc;
     font-weight: bold;
@@ -71,8 +71,10 @@
     transition: all 0.3s ease;
     align-self: flex-start;
   }
-  
-  .add-page button[type="submit"]:hover {
+
+  .add-page button[type="submit"]:not([class*="Mui"]):hover {
     background-color: #f91f15;
   }
+  
+
   
