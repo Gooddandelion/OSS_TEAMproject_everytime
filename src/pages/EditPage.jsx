@@ -10,7 +10,12 @@ function EditPage() {
     const navigate = useNavigate();
     const { selectedLecture, fetchLectureById, updateLecture } = useLectureStore();
 
-    const { control, handleSubmit, reset } = useForm({
+    const {
+        control,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm({
         defaultValues: {
             강의명: '',
             교수님: '',
@@ -35,7 +40,6 @@ function EditPage() {
 
     useEffect(() => {
         if (selectedLecture) {
-            // 강의시간이 배열이면 문자열로 변환
             const timeValue = Array.isArray(selectedLecture.강의시간) ? selectedLecture.강의시간.join(',') : selectedLecture.강의시간 || '';
             reset({
                 강의명: selectedLecture.강의명 || '',
@@ -68,20 +72,22 @@ function EditPage() {
         <Box className="edit-page" sx={{ p: 2, maxWidth: 800, mx: 'auto' }}>
             <Typography variant="h5" component="h2" gutterBottom>강의 정보 수정</Typography>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <Controller
                     name="강의명"
                     control={control}
+                    rules={{ required: '과목명은 필수입니다.' }}
                     render={({ field }) => (
-                        <TextField {...field} label="과목명" fullWidth margin="normal" />
+                        <TextField {...field} label="과목명" fullWidth margin="normal" error={!!errors.강의명} helperText={errors.강의명?.message} />
                     )}
                 />
 
                 <Controller
                     name="교수님"
                     control={control}
+                    rules={{ required: '교수님은 필수입니다.' }}
                     render={({ field }) => (
-                        <TextField {...field} label="교수님" fullWidth margin="normal" />
+                        <TextField {...field} label="교수님" fullWidth margin="normal" error={!!errors.교수님} helperText={errors.교수님?.message} />
                     )}
                 />
 
@@ -104,8 +110,13 @@ function EditPage() {
                 <Controller
                     name="평점"
                     control={control}
+                    rules={{
+                        required: '평점은 필수입니다.',
+                        min: { value: 0, message: '0 이상 입력' },
+                        max: { value: 5, message: '5 이하 입력' },
+                    }}
                     render={({ field }) => (
-                        <TextField {...field} label="평점" type="number" fullWidth margin="normal" />
+                        <TextField {...field} label="평점" type="number" fullWidth margin="normal" error={!!errors.평점} helperText={errors.평점?.message} />
                     )}
                 />
 
@@ -160,32 +171,43 @@ function EditPage() {
                 <Controller
                     name="시험횟수"
                     control={control}
+                    rules={{
+                        min: { value: 0, message: '0 이상 입력' },
+                        max: { value: 10, message: '10 이하 입력' },
+                    }}
                     render={({ field }) => (
-                        <TextField {...field} label="시험횟수" type="number" fullWidth margin="normal" />
+                        <TextField {...field} label="시험횟수" type="number" fullWidth margin="normal" error={!!errors.시험횟수} helperText={errors.시험횟수?.message} />
                     )}
                 />
 
                 <Controller
                     name="강의시간"
                     control={control}
+                    rules={{ required: '강의시간은 필수입니다.' }}
                     render={({ field }) => (
-                        <TextField {...field} label="강의시간 (예: 월요일,목요일,1교시)" fullWidth margin="normal" />
+                        <TextField {...field} label="강의시간 (예: 월요일,목요일,1교시)" fullWidth margin="normal" error={!!errors.강의시간} helperText={errors.강의시간?.message} />
                     )}
                 />
 
                 <Controller
                     name="이수구분"
                     control={control}
+                    rules={{ required: '이수구분은 필수입니다.' }}
                     render={({ field }) => (
-                        <TextField {...field} label="이수구분" fullWidth margin="normal" />
+                        <TextField {...field} label="이수구분" fullWidth margin="normal" error={!!errors.이수구분} helperText={errors.이수구분?.message} />
                     )}
                 />
 
                 <Controller
                     name="학점"
                     control={control}
+                    rules={{
+                        required: '학점은 필수입니다.',
+                        min: { value: 1, message: '1 이상 입력' },
+                        max: { value: 5, message: '5 이하 입력' },
+                    }}
                     render={({ field }) => (
-                        <TextField {...field} label="학점" type="number" fullWidth margin="normal" />
+                        <TextField {...field} label="학점" type="number" fullWidth margin="normal" error={!!errors.학점} helperText={errors.학점?.message} />
                     )}
                 />
 
@@ -206,16 +228,24 @@ function EditPage() {
                 <Controller
                     name="설계학점"
                     control={control}
+                    rules={{
+                        min: { value: 0, message: '0 이상 입력' },
+                        max: { value: 10, message: '10 이하 입력' },
+                    }}
                     render={({ field }) => (
-                        <TextField {...field} label="설계학점" type="number" fullWidth margin="normal" />
+                        <TextField {...field} label="설계학점" type="number" fullWidth margin="normal" error={!!errors.설계학점} helperText={errors.설계학점?.message} />
                     )}
                 />
 
                 <Controller
                     name="영어비율"
                     control={control}
+                    rules={{
+                        min: { value: 0, message: '0 이상 입력' },
+                        max: { value: 100, message: '100 이하 입력' },
+                    }}
                     render={({ field }) => (
-                        <TextField {...field} label="영어비율(%)" type="number" fullWidth margin="normal" />
+                        <TextField {...field} label="영어비율(%)" type="number" fullWidth margin="normal" error={!!errors.영어비율} helperText={errors.영어비율?.message} />
                     )}
                 />
 
