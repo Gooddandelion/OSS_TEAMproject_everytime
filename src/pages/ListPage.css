@@ -7,6 +7,40 @@
   margin-top: 1rem;
 }
 
+/* 모바일 대응 */
+@media (max-width: 600px) {
+  .list-container {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 0.5rem;
+  }
+  .list-column {
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 10px;
+  }
+  .list-table {
+    font-size: 13px;
+    margin-top: 0.5rem;
+    table-layout: auto;
+  }
+  .list-table th, .list-table td {
+    padding: 7px;
+    font-size: 12px;
+  }
+  .col-title, .col-professor, .col-time, .col-rating, .col-credit, .col-actions {
+    width: auto !important;
+    min-width: 60px;
+    max-width: 120px;
+    word-break: break-all;
+  }
+  .main-btn, .table-btn {
+    padding: 6px 10px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+}
+
 /* 컬럼별 flex 설정 */
 .list-column {
   flex: 1;
