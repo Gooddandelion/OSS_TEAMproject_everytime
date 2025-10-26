@@ -1,25 +1,24 @@
-Team Project
-s
 
-### `npm start`
+# Team Project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 프로젝트 실행을 위한 필수 의존성 설치
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+아래 명령어로 모든 필수 패키지를 한 번에 설치할 수 있습니다:
 
-### `npm test`
+```bash
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 주요 의존성 리스트
 
-### `npm run build`
+- react, react-dom, react-router-dom (SPA 및 라우팅)
+- zustand (상태 관리)
+- axios (비동기 통신)
+- @mui/material, @emotion/react, @emotion/styled (UI 컴포넌트)
+- react-hook-form (폼 관리 및 validation)
+- chart.js, react-chartjs-2 (차트 시각화)
+- cross-fetch, dotenv, groq-sdk (API 및 환경설정)
+- @testing-library/*, web-vitals (테스트 및 성능)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+package.json에 모든 버전이 명시되어 있습니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
